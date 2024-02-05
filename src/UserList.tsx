@@ -40,14 +40,10 @@ export const UserList = () => {
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 {Todos
                   .filter((todo) => todo.userId === user.id)
-                  .map((todo) => (
-                    <div
-                      style={{
-                        background: todo.completed ? 'green' : 'red',
-                        color: 'white',
-                      }}
-                    >
-                      {todo.title}
+                  .map((todo, i) => (
+                    <div>
+                      <input id={'todo_' + i} type='checkbox' checked={todo.completed} />
+                      <label>{todo.title}</label>
                     </div>
                   ))}
               </div>
