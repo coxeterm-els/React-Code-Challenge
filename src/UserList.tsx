@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export const UserList = () => {
   const [users, setUsers] = useState([]);
-  const [todos, setTodos] = useState([]);
+  const [Todos, setTodos] = useState([]);
   const [filter, setFilter] = useState('');
   const [hideTodos, setHideTodos] = useState({});
 
   useEffect(() => {
-    // Simulating an API call to fetch users
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((response) => response.json())
       .then((data) => setUsers(data));
@@ -19,7 +18,7 @@ export const UserList = () => {
       .then((data) => setTimeout(() => setTodos(data), 5000));
   }, []);
 
-  const renderUsers = () => {
+  var renderUsers = () => {
     return users
       .filter((u) => u.name.includes(filter))
       .map((user) => (
@@ -39,7 +38,7 @@ export const UserList = () => {
             <>
               <p>Todos: </p>
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                {todos
+                {Todos
                   .filter((todo) => todo.userId === user.id)
                   .map((todo) => (
                     <div
@@ -69,7 +68,7 @@ export const UserList = () => {
           onChange={(e) => setFilter(e.target.value)}
         />
       </div>
-      {renderUsers()} {/* Missing 'key' prop when iterating over the array */}
+      {renderUsers()}
       <h2>Summary</h2>
       <div>{users.length + ': Users shown.'}</div>
     </div>
